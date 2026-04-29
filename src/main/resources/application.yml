@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  # Configuración de H2 para pruebas rápidas
+  datasource:
+    url: jdbc:h2:mem:employeedb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update # Crea las tablas automáticamente al iniciar
+    show-sql: true # Muy útil para ver qué está pasando en la DB
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Habilitar consola de H2 para ver los datos en el navegador
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Actuator para requerimientos de monitoreo (opcional pero recomendado)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
