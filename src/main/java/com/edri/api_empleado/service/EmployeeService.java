@@ -92,4 +92,11 @@ public class EmployeeService {
                 .isActive(dto.getIsActive())
                 .build();
     }
+
+    public List<EmployeeDTO> searchEmployeesByName(String name) {
+        return repository.findByNameContaining(name)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 }
